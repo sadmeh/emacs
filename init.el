@@ -1,7 +1,7 @@
 ;; Basic UI Configuration ------------------------------------------------------
 
 ;; You will most likely need to adjust this font size for your system!
-(defvar runemacs/default-font-size 180)
+(defvar runemacs/default-font-size 140)
 
 (setq inhibit-startup-message t)
 
