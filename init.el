@@ -183,8 +183,8 @@
   ("C-c p" . projectile-command-map)
   :init
   ;; NOTE: Set this to the folder where you keep your Git repos!
-  (when (file-directory-p "~/Projects/Code")
-    (setq projectile-project-search-path '("~/Projects/Code")))
+  (when (file-directory-p "~/projecs")
+    (setq projectile-project-search-path '("~/projects")))
   (setq projectile-switch-project-action #'projectile-dired))
 
 (use-package counsel-projectile
@@ -263,10 +263,34 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(visual-fill-column forge which-key use-package rainbow-mode rainbow-delimiters popup org-bullets org move-text magit ivy-rich hydra helpful goto-chg general font-utils exwm emms doom-themes doom-modeline desktop-environment counsel-projectile command-log-mode async all-the-icons)))
+   '(helm helm-lsp lsp-ivy lsp-java lsp-ui company lsp-mode yasnippet flycheck emms-setup visual-fill-column forge which-key use-package rainbow-mode rainbow-delimiters popup org-bullets org move-text magit ivy-rich hydra helpful goto-chg general font-utils exwm emms doom-themes doom-modeline desktop-environment counsel-projectile command-log-mode async all-the-icons)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(use-package emms
+  :config
+  (require 'emms-setup)
+  (emms-all)
+  (setq emms-player-list '(emms-player-mpv)))
+
+
+(use-package projectile)
+(use-package flycheck)
+(use-package yasnippet :config (yas-global-mode))
+(use-package lsp-mode :hook ((lsp-mode . lsp-enable-which-key-integration))
+  :config (setq lsp-completion-enable-additional-text-edit nil))
+(use-package hydra)
+(use-package company)
+(use-package lsp-ui)
+(use-package which-key :config (which-key-mode))
+(use-package lsp-java :config (add-hook 'java-mode-hook 'lsp))
+(use-package dap-mode :after lsp-mode :config (dap-auto-configure-mode))
+(use-package dap-java :ensure nil)
+ (use-package helm-lsp)
+ (use-package helm
+   :config (helm-mode))
+(use-package lsp-treemacs)
